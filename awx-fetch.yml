@@ -1,0 +1,32 @@
+---
+- hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: Cloning awx repository inside roles/
+      git:
+        repo: https://github.com/ansible/awx.git
+        version: devel
+        dest: "{{ playbook_dir }}/roles/awx"
+
+    - name: Copy files
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: 0755
+      with_items:
+        - { src: "{{ playbook_dir }}/roles/awx/installer/inventory", dest: "{{ playbook_dir }}/inventories/awx" }
+
+    - name: Define awx deployment environment
+      lineinfile:
+        path: "{{ playbook_dir }}/inventories/awx"
+        regexp: '^localhost'
+        line: 'localhost ansible_connection=local ansible_python_interpreter="/usr/bin/env python"'
+      when: awx_env_depl == 'localhost'
+
+    - name: Define awx deployment environment
+      lineinfile:
+        path: "{{ playbook_dir }}/inventories/awx"
+        regexp: '^localhost'
+        line: '#localhost ansible_connection=local ansible_python_interpreter="/usr/bin/env python"'
+      when: awx_env_depl == 'remote'

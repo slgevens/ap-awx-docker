@@ -1,0 +1,22 @@
+---
+- hosts: awx
+  gather_facts: true
+  become: true
+
+  vars:
+    dockerhub_version: "{{ lookup('file', playbook_dir + '/roles/awx/VERSION') }}"
+    # all variables can be found in inventories/awx after running awx-fetch.yml and be overwritten here.
+    pg_password: awx_pg_password_placeholder
+    rabbitmq_password: awx_rabbitmq_password_placeholder
+    admin_password: awx_admin_password_placeholder
+    secret_key: awx_secret_key_placeholder
+
+  tasks:
+    - name: AWX requirements role
+      include_role: name=ar-awx-requirements
+
+    - name: AWX deployment - check_vars role
+      include_role: name="{{ playbook_dir }}/roles/awx/installer/roles/check_vars"
+
+    - name: AWX deployment - local_docker role
+      include_role: name="{{ playbook_dir }}/roles/awx/installer/roles/local_docker"

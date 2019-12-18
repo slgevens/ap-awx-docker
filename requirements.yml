@@ -1,0 +1,4 @@
+---
+- src: https://github.com/slgevens/ar-awx-requirements.git
+  name: ar-awx-requirements
+  version: master
