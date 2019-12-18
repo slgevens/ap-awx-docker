@@ -1,4 +1,4 @@
 ---
 - src: https://github.com/slgevens/ar-awx-docker-requirements.git
-  name: ar-awx-requirements
+  name: ar-awx-docker-requirements
   version: master
