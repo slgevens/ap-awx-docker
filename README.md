@@ -1,17 +1,17 @@
 # ap-awx-docker
 Ansible playbook to install and configure AWX when using "docker-compose"
 
-## Locahost preps requirements
+## Localhost preps requirements
 
-- Ansible needs to be installed (using 2.9)
+- Ansible needs to be installed on the host running the playbook (using ansible-2.9)
 
 ```console
 make all
 ```
 
-## Define where AWX will be installed (local or remote)
+## Define where AWX will be installed (localhost or remote)
 
-### local host
+### localhost
 
 ```console
 ansible-playbook awx-fetch.yml -e awx_env_depl=localhost -D
