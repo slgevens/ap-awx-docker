@@ -13,7 +13,7 @@
 
   tasks:
     - name: AWX requirements role
-      include_role: name=ar-awx-requirements
+      include_role: name=ar-awx-docker-requirements
 
     - name: AWX deployment - check_vars role
       include_role: name="{{ playbook_dir }}/roles/awx/installer/roles/check_vars"
