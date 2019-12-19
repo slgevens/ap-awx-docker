@@ -6,3 +6,4 @@ vars/ext
 .retry
 log
 roles
+inventories/awx
